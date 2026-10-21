@@ -1,0 +1,255 @@
+{
+  "problem_id": "matrix_multiply",
+  "round_id": 1,
+  "root_id": "root",
+  "nodes": {
+    "root": {
+      "node_id": "root",
+      "parent_id": null,
+      "problem_id": "matrix_multiply",
+      "agent_id": "baseline",
+      "proposal": "Naive O(N^3) standard baseline",
+      "artifact_uri": "uri://baseline",
+      "score": 0.7359,
+      "correct": true,
+      "runtime_ms": 7.45,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 0,
+      "round_id": 0,
+      "created_at": "2026-10-21T18:33:28.436900Z",
+      "metadata": {}
+    },
+    "node_1_0_777268": {
+      "node_id": "node_1_0_777268",
+      "parent_id": "root",
+      "problem_id": "matrix_multiply",
+      "agent_id": "algorithm",
+      "proposal": "Pre-transpose matrix B so inner product traverses row-major contiguous memory.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_0_777268.py",
+      "score": 0.7959,
+      "correct": true,
+      "runtime_ms": 6.49,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 1,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:28.541375Z",
+      "metadata": {
+        "strategy_tag": "transpose_b",
+        "speedup": 2.78,
+        "static_passed": true
+      }
+    },
+    "node_1_1_d5c3f0": {
+      "node_id": "node_1_1_d5c3f0",
+      "parent_id": "node_1_0_777268",
+      "problem_id": "matrix_multiply",
+      "agent_id": "algorithm",
+      "proposal": "Reorder triple loop from i-j-k to i-k-j to access B row-wise, drastically reducing cache misses.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_1_d5c3f0.py",
+      "score": 0.8918,
+      "correct": true,
+      "runtime_ms": 5.37,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 2,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:28.626425Z",
+      "metadata": {
+        "strategy_tag": "ikj_loop_interchange",
+        "speedup": 3.35,
+        "static_passed": true
+      }
+    },
+    "node_1_2_efe4f1": {
+      "node_id": "node_1_2_efe4f1",
+      "parent_id": "node_1_1_d5c3f0",
+      "problem_id": "matrix_multiply",
+      "agent_id": "algorithm",
+      "proposal": "Loop interchange with local variable caching to bypass list lookups.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_2_efe4f1.py",
+      "score": 0.8537,
+      "correct": true,
+      "runtime_ms": 5.76,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 3,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:28.711910Z",
+      "metadata": {
+        "strategy_tag": "ikj_with_local_caching",
+        "speedup": 3.12,
+        "static_passed": true
+      }
+    },
+    "node_1_3_4bc9f1": {
+      "node_id": "node_1_3_4bc9f1",
+      "parent_id": "node_1_2_efe4f1",
+      "problem_id": "matrix_multiply",
+      "agent_id": "algorithm",
+      "proposal": "Unroll the inner j-loop by 4 to reduce loop condition branch checks.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_3_4bc9f1.py",
+      "score": 0.8378,
+      "correct": true,
+      "runtime_ms": 5.95,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 4,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:28.803420Z",
+      "metadata": {
+        "strategy_tag": "unrolled_inner_loop",
+        "speedup": 3.03,
+        "static_passed": true
+      }
+    },
+    "node_1_4_b073a8": {
+      "node_id": "node_1_4_b073a8",
+      "parent_id": "node_1_3_4bc9f1",
+      "problem_id": "matrix_multiply",
+      "agent_id": "gpu",
+      "proposal": "Block-tiled matrix multiplication with 16x16 tile cache chunks.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_4_b073a8.py",
+      "score": 0.8514,
+      "correct": true,
+      "runtime_ms": 5.79,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 5,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:28.890118Z",
+      "metadata": {
+        "strategy_tag": "tiled_blocking",
+        "speedup": 3.11,
+        "static_passed": true
+      }
+    },
+    "node_1_5_dc9a64": {
+      "node_id": "node_1_5_dc9a64",
+      "parent_id": "node_1_4_b073a8",
+      "problem_id": "matrix_multiply",
+      "agent_id": "math",
+      "proposal": "Strassen divide-and-conquer algorithm with recursive 7-subproblem decomposition.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_5_dc9a64.py",
+      "score": 0.8531,
+      "correct": true,
+      "runtime_ms": 5.77,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 6,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:28.981965Z",
+      "metadata": {
+        "strategy_tag": "strassen_algebraic",
+        "speedup": 3.12,
+        "static_passed": true
+      }
+    },
+    "node_1_6_f4e42c": {
+      "node_id": "node_1_6_f4e42c",
+      "parent_id": "node_1_5_dc9a64",
+      "problem_id": "matrix_multiply",
+      "agent_id": "algorithm",
+      "proposal": "Flatten 2D matrices into 1D continuous arrays to eliminate inner pointer chasing.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_6_f4e42c.py",
+      "score": 0.7686,
+      "correct": true,
+      "runtime_ms": 6.89,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 7,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:29.068114Z",
+      "metadata": {
+        "strategy_tag": "preallocated_flat_array",
+        "speedup": 2.61,
+        "static_passed": true
+      }
+    },
+    "node_1_7_208f02": {
+      "node_id": "node_1_7_208f02",
+      "parent_id": "node_1_6_f4e42c",
+      "problem_id": "matrix_multiply",
+      "agent_id": "debug",
+      "proposal": "Attempt fast multiplication without initializing column width properly.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_7_208f02.py",
+      "score": 0.0,
+      "correct": false,
+      "runtime_ms": null,
+      "memory_mb": 0.0,
+      "error": "AssertionError: 1x1 failed",
+      "depth": 8,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:29.127428Z",
+      "metadata": {
+        "strategy_tag": "buggy_dimension_mismatch",
+        "speedup": null,
+        "static_passed": true
+      }
+    },
+    "node_1_8_0566b0": {
+      "node_id": "node_1_8_0566b0",
+      "parent_id": "root",
+      "problem_id": "matrix_multiply",
+      "agent_id": "debug",
+      "proposal": "Malicious probe attempting to import os and inspect env variables.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_8_0566b0.py",
+      "score": 0.0,
+      "correct": false,
+      "runtime_ms": null,
+      "memory_mb": null,
+      "error": "SecurityViolation: Import of 'os' is prohibited.",
+      "depth": 1,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:29.128201Z",
+      "metadata": {
+        "strategy_tag": "security_test_exploit",
+        "speedup": null,
+        "static_passed": false
+      }
+    },
+    "node_1_9_d9eb5a": {
+      "node_id": "node_1_9_d9eb5a",
+      "parent_id": "node_1_0_777268",
+      "problem_id": "matrix_multiply",
+      "agent_id": "algorithm",
+      "proposal": "Pure Python optimized list comprehension with zip and pre-transposed B.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_9_d9eb5a.py",
+      "score": 0.8102,
+      "correct": true,
+      "runtime_ms": 6.29,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 2,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:29.212882Z",
+      "metadata": {
+        "strategy_tag": "transposed_list_comprehension",
+        "speedup": 2.86,
+        "static_passed": true
+      }
+    },
+    "node_1_10_4f7a0b": {
+      "node_id": "node_1_10_4f7a0b",
+      "parent_id": "node_1_0_777268",
+      "problem_id": "matrix_multiply",
+      "agent_id": "math",
+      "proposal": "Functional map inner product with operator.mul.",
+      "artifact_uri": "/home/ankitsingh/Desktop/projects/DreamCode-RSI With Laya/dreamcode-rsi/data/artifacts/node_1_10_4f7a0b.py",
+      "score": 1.0,
+      "correct": true,
+      "runtime_ms": 2.94,
+      "memory_mb": 0.0,
+      "error": null,
+      "depth": 2,
+      "round_id": 1,
+      "created_at": "2026-10-21T18:33:29.284877Z",
+      "metadata": {
+        "strategy_tag": "map_inner_product",
+        "speedup": 6.12,
+        "static_passed": true
+      }
+    }
+  }
+}
