@@ -166,7 +166,7 @@ nvidia-cuda-nvrtc==13.0.88 ; sys_platform == 'linux'
     #   nvidia-cublas
 nvidia-cuda-runtime==13.0.96 ; (platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')
     # via cuda-toolkit
-nvidia-cudnn-cu13==9.24.0.43 ; sys_platform == 'linux'
+nvidia-cudnn-cu13==9.20.0.48 ; sys_platform == 'linux'
     # via torch
 nvidia-cufft==12.0.0.61 ; (platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')
     # via cuda-toolkit
@@ -182,7 +182,7 @@ nvidia-cusparse==12.6.3.3 ; (platform_machine == 'aarch64' and sys_platform == '
     #   nvidia-cusolver
 nvidia-cusparselt-cu13==0.8.1 ; sys_platform == 'linux'
     # via torch
-nvidia-nccl-cu13==2.30.7 ; sys_platform == 'linux'
+nvidia-nccl-cu13==2.29.7 ; sys_platform == 'linux'
     # via torch
 nvidia-nvjitlink==13.4.92 ; (platform_machine == 'aarch64' and sys_platform == 'linux') or (platform_machine == 'x86_64' and sys_platform == 'linux')
     # via
@@ -292,7 +292,7 @@ tokenizers==0.23.3
     # via transformers
 tomlkit==0.14.0
     # via gradio
-torch==2.14.1
+torch==2.13.0
     # via
     #   dreamcode-rsi
     #   laya
@@ -304,7 +304,7 @@ transformers==5.20.2
     # via
     #   dreamcode-rsi
     #   laya
-triton==3.8.0 ; python_full_version < '3.15' and sys_platform == 'linux'
+triton==3.7.1 ; python_full_version < '3.15' and sys_platform == 'linux'
     # via torch
 truststore==0.10.5 ; sys_platform != 'emscripten'
     # via
