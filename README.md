@@ -268,5 +268,5 @@ uv run pytest tests/ -v
 ---
 
 <div align="center">
-Built with ❤️ by Ankit Singh. Licensed under the <a href="LICENSE">MIT License</a>.
+Built by Ankit Singh. Licensed under the <a href="LICENSE">MIT License</a>.
 </div>
