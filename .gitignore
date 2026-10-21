@@ -8,6 +8,8 @@ __pycache__/
 
 # Data & cache
 data/cache/
+data/artifacts/
+data/experiments/demo_exp_*.json
 *.db-journal
 .pytest_cache/
 .ruff_cache/

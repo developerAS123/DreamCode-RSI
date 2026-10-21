@@ -210,3 +210,4 @@ All experiments were conducted on deterministic benchmark tasks (Matrix Multipli
 
 ### Q: What is your primary research extension?
 > **Answer:** "We developed an Uncertainty-Aware LayDream exploration controller that factors in outcome variance, observation sparsity, and specialist diversity to combat premature branch exploitation on incomplete discovery trees."
+

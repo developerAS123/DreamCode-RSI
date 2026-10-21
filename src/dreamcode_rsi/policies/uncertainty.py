@@ -114,3 +114,4 @@ class UncertaintyAwarePolicy(ExplorationPolicy):
             },
             "formula": "w1*gain + w2*uncertainty + w3*diversity + w4*success - w5*cost",
         }
+

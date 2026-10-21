@@ -155,9 +155,10 @@ def run_discovery_flow(task_choice: str, num_rounds: int, worker_count: int):
 **Routing Probabilities:**
 """ + "\n".join([f"- **{k.capitalize()}**: `{v:.2%}`" for k, v in route_info.get("probabilities", {}).items()])
 
-    # Tree
-    trees = history_mgr.list_trees(task_choice)
-    latest_tree = history_mgr.load_tree(trees[0]) if trees else None
+    # Tree — locate files by exp_id prefix (saved as {exp_id}_r{round}.json)
+    from pathlib import Path as _Path
+    exp_tree_files = sorted(history_mgr.base_dir.glob(f"{exp_id}_r*.json"))
+    latest_tree = history_mgr.load_tree(exp_tree_files[-1]) if exp_tree_files else None
     nodes_data = []
     if latest_tree:
         for n in latest_tree.nodes.values():
@@ -171,10 +172,10 @@ def run_discovery_flow(task_choice: str, num_rounds: int, worker_count: int):
                 "Proposal": n.proposal[:60],
             })
     df_nodes = pd.DataFrame(nodes_data) if nodes_data else pd.DataFrame([])
-    tree_ascii = latest_tree.render_ascii() if latest_tree else "Tree generated successfully."
+    tree_ascii = latest_tree.render_ascii() if latest_tree else "No tree data found for this run."
 
-    # Replay
-    pool = history_mgr.get_simulator_pool(task_choice)
+    # Replay — load all trees from this experiment
+    pool = [history_mgr.load_tree(p) for p in exp_tree_files] if exp_tree_files else []
     if pool:
         runner = ReplayRunner(pool)
         policies = [FixedPolicy("fixed_fifo"), GreedyPolicy("greedy_best"), RandomPolicy(42, "random_sample")]

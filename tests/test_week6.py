@@ -75,3 +75,4 @@ def test_ablation_engine_all_six_conditions():
         assert "| Condition / Baseline |" in md_table
         assert res.ablation_name in md_table
         print(f"\n{res.ablation_name} PASSED:\n{md_table[:200]}...")
+
