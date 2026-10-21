@@ -15,6 +15,13 @@ from dreamcode_rsi.graph import build_dream_graph
 from dreamcode_rsi.state import DreamState
 from dreamcode_rsi.storage.db import init_db
 
+try:
+    import spaces
+    gpu_decorator = spaces.GPU
+except Exception:
+    def gpu_decorator(fn):
+        return fn
+
 init_db()
 router = LayaRouter()
 history_mgr = TreeHistoryManager()
@@ -108,6 +115,7 @@ def get_preloaded_data():
     return route_md, df_nodes, tree_ascii, df_replay, df_timeline, metrics_md
 
 
+@gpu_decorator
 def run_discovery_flow(task_choice: str, num_rounds: int, worker_count: int):
     """Executes live LangGraph recursive loop for selected problem."""
     task = get_benchmark(task_choice)
@@ -212,7 +220,7 @@ def create_demo_ui():
         neutral_hue="slate",
     )
 
-    with gr.Blocks(theme=custom_theme, title="DreamCode-RSI + Laya") as demo:
+    with gr.Blocks(title="DreamCode-RSI + Laya") as demo:
         gr.Markdown(
             """
             # 🚀 DreamCode-RSI + Laya
